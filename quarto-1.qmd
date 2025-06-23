@@ -1,5 +1,32 @@
 ---
 title: "Quarto 1"
 format: html
+execute: 
+  echo: false
 ---
 
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+library(palmerpenguins)
+```
+
+```{r}
+ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE, aes(group = species), linetype = "dashed") +
+  scale_color_manual(values = c("Adelie" = "pink", "Chinstrap" = "blue", "Gentoo" = "purple")) +
+  labs(
+    title = "Penguin Flipper Length vs Body Mass",
+    subtitle = "Species comparison from Palmer Station, Antarctica",
+    x = "Flipper Length (mm)",
+    y = "Body Mass (g)",
+    caption = "Data from the palmerpenguins package",
+    color = "Species"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(size = 14),
+    legend.title = element_text(face = "bold")
+  )
+```
